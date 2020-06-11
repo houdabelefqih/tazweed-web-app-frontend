@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, Button, } from 'semantic-ui-react'
-import moment from 'moment'
+import { Card, Button, Icon, Image } from 'semantic-ui-react'
+import clock from '../images/compass.png'
 
 function Slot(props) {
     const { date, start, end, available } = props.slot
@@ -8,13 +8,18 @@ function Slot(props) {
     return (
         <Card>
             <Card.Content>
-    <Card.Header>{start} - {end}</Card.Header>
-    <Card.Meta>{date}</Card.Meta>
+                <Image
+                    floated='right'
+                    size='mini'
+                    src={clock}
+                />
+                <Card.Header>{start} - {end}</Card.Header>
+                <Card.Meta>{date}</Card.Meta>
 
             </Card.Content>
             <Card.Content extra>
                 <div className='ui two buttons'>
-                    <Button basic color='red'>
+                    <Button negative>
                         Delete
           </Button>
                 </div>
