@@ -1,33 +1,28 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { Grid, Icon, Header, Segment, Container, Input } from 'semantic-ui-react'
-import Appointment from './Appointment'
-import moment from 'moment'
+import { Grid, Icon, Header, Segment, Input } from 'semantic-ui-react'
+import Request from '../components/Request'
 
 
 function Appointments() {
 
-    const { loading, data } = useQuery(FETCH_APPOINTMENTS_QUERY);
-    const today = moment().format('dddd, MMMM Do')
-    const year = moment().format('YYYY')
-
-    if (data) console.log(data.appointments.edges);
+    const { loading, data } = useQuery(FETCH_REQUESTS_QUERY);
 
     return (
 
             <Segment raised color="black">
-                <Segment textAlign='right' raised color="orange" >
+                <Segment textAlign='left' raised color="orange" >
                     <Grid columns={2} relaxed='very'>
                         <Grid.Column>
-                            <Grid.Row fluid>
+                            <Grid.Row>
                                 <Header as='h2'>
-                                    <Icon name='angle double left' />
-                                    <Header.Content padded>
-                                        {today}
-                                        <Header.Subheader>{year}</Header.Subheader>
+                                <Icon name='question'/>
+
+                                    <Header.Content>
+                                        Requests
+                                        <Header.Subheader></Header.Subheader>
                                     </Header.Content>
-                                    <Icon name='angle double right' />
                                 </Header>
                             </Grid.Row>
                         </Grid.Column>
@@ -44,17 +39,16 @@ function Appointments() {
                 <Grid padded columns={3}>
 
                     <Grid.Row>
-                        {loading ?
-                            (<h1> Loading slots... <Icon loading name='spinner' /> </h1>
+                        {loading || !data ?
+                            (<h3> Loading requests... <Icon loading name='spinner' /> </h3>
                             ) :
                             (data.appointments.edges && data.appointments.edges.map(({ node }) =>
                                 <Grid.Column key={node.id}>
-                                    <Appointment appointment={node} />
+                                    <Request request={node} />
                                 </Grid.Column>))}
                     </Grid.Row>
                 </Grid>
             </Segment>
-
 
     )
 
@@ -63,11 +57,12 @@ function Appointments() {
 export default Appointments;
 
 
-const FETCH_APPOINTMENTS_QUERY = gql`
+const FETCH_REQUESTS_QUERY = gql`
 query{
-    appointments(status_Iexact:"approved"){
+    appointments(status_Iexact:"pending", orderBy: "slot__start"){
         edges{
             node{
+                id
                 uuid
                 slot{
                     uuid

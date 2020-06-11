@@ -1,7 +1,5 @@
-
-
 import React from 'react'
-import { Card, Button, Icon, Image } from 'semantic-ui-react'
+import { Card, Button, Image } from 'semantic-ui-react'
 import calendar from '../images/calendar.png'
 import moment from 'moment'
 import { Link }  from 'react-router-dom'
@@ -9,12 +7,12 @@ import { Link }  from 'react-router-dom'
 
 
 function Appointment(props) {
-    const { slot, client, seller, status } = props.appointment;
+    const { slot, client, seller} = props.appointment;
     const slot_time = moment(slot.start, 'HH:mm:ss').format("HH:mm") + ' - ' + moment(slot.end, 'HH:mm:ss').format("HH:mm ");
 
 
     return (
-        <Card fluid >
+        <Card fluid style={{marginBottom : 30}}>
             <Card.Content floated='center'>
                 <Image
                     floated='right'

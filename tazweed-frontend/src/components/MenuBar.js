@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu} from 'semantic-ui-react'
 import { Link }  from 'react-router-dom'
 
 function MenuBar() {
@@ -15,8 +15,7 @@ function MenuBar() {
 
 
     return (
-      <div>
-        <Menu pointing secondary size="massive" color="orange">
+         <Menu pointing secondary size="massive" color="orange">
           <Menu.Item
             name='home'
             active={activeItem === 'home'}
@@ -71,9 +70,8 @@ function MenuBar() {
 
             />
           </Menu.Menu>
-        </Menu>
+        </Menu>       
 
-      </div>
     )
   }
 

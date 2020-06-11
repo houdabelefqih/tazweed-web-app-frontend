@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { Grid, Icon, Header, Segment, Container, Input } from 'semantic-ui-react'
+import { Grid, Icon, Header, Segment} from 'semantic-ui-react'
 
 function Profile() {
 
@@ -14,11 +14,11 @@ function Profile() {
                 <Segment textAlign='left' raised color="orange" >
                     <Grid columns={2} relaxed='very'>
                         <Grid.Column>
-                            <Grid.Row fluid>
+                            <Grid.Row>
                                 <Header as='h2'>
-                                <Icon name='user' padded />
+                                <Icon name='user' />
 
-                                    <Header.Content padded>
+                                    <Header.Content>
                                         Profile
                                         <Header.Subheader></Header.Subheader>
                                     </Header.Content>
@@ -36,9 +36,9 @@ function Profile() {
 
                 <Grid padded columns={3}>
 
-                    <Grid.Row fluid>
-                        {loading ?
-                            (<h1> Loading profile information... <Icon loading name='spinner' /> </h1>
+                    <Grid.Row>
+                        {loading  || !data ?
+                            (<h3> Loading profile information... <Icon loading name='spinner' /> </h3>
                             ) :
                             (data.users.edges && data.users.edges.map(({ node }) =>
                                 <Grid.Column key={node.id}>

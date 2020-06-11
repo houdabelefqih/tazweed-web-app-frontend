@@ -1,17 +1,17 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import { Container, Segment } from 'semantic-ui-react'
+import { Container} from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
-import Home from './components/Home'
-import Login from './components/Login'
-import Register from './components/Register'
-import Logout from './components/Logout'
-import Profile from './components/Profile'
-import Appointments from './components/Appointments.js'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Logout from './pages/Logout'
+import Profile from './pages/Profile'
+import Appointments from './pages/Appointments.js'
 import MenuBar from './components/MenuBar'
-import Requests from './components/Requests'
+import Requests from './pages/Requests'
 
 
 function App() {

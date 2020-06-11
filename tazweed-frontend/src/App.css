@@ -1,5 +1,8 @@
+
+
 .App {
   text-align: center;
+  font-family: 'Nunito', sans-serif;
 }
 
 .App-logo {
@@ -35,4 +38,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+.form-container{
+  width:400px;
+  margin: auto;
+
 }
