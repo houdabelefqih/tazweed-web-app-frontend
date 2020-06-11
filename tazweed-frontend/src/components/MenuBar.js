@@ -31,6 +31,13 @@ function MenuBar() {
             as={Link}
             to="/appointments"
           />
+           <Menu.Item
+            name='requests'
+            active={activeItem === 'requests'}
+            onClick={handleItemClick}
+            as={Link}
+            to="/requests"
+          />
           <Menu.Item
             name='profile'
             active={activeItem === 'profile'}

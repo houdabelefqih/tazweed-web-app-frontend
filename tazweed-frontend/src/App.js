@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import { Container } from 'semantic-ui-react'
+import { Container, Segment } from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -11,6 +11,7 @@ import Logout from './components/Logout'
 import Profile from './components/Profile'
 import Appointments from './components/Appointments.js'
 import MenuBar from './components/MenuBar'
+import Requests from './components/Requests'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
      <MenuBar/>
      <Route exact path='/' component={Home}/>
      <Route exact path='/appointments' component={Appointments}/>
+     <Route exact path='/requests' component={Requests}/>
      <Route exact path='/profile' component={Profile}/>
      <Route exact path='/login' component={Login}/>
      <Route exact path='/register' component={Register}/>

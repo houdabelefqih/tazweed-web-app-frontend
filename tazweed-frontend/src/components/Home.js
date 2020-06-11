@@ -15,17 +15,13 @@ function Home() {
     if (data) console.log(data.slots.edges);
 
     return (
-        <Container>
-              <Image src='https://react.semantic-ui.com/images/wireframe/image.png' fluid />
+        <Segment raised color="black">
 
-            
-        <Segment padded raised color="orange">
-
-            <Segment textAlign='right' raised color="black">
+            <Segment textAlign='right' raised color="orange">
                 <Grid columns={2} relaxed='very'>
                     <Grid.Column>
                         <Grid.Row fluid>
-                            <Header as='h1'>
+                            <Header as='h2'>
                                 <Icon name='angle double left' />
                                 <Header.Content padded>
                                     {today}
@@ -61,7 +57,6 @@ function Home() {
             </Grid>
         </Segment>
 
-        </Container>
     )
 
 }
