@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { Grid, Icon, Header, Segment, Button, GridColumn} from 'semantic-ui-react'
+import { Grid, Icon, Header, Segment, Button, GridColumn, Message, Modal } from 'semantic-ui-react'
 import Slot from '../components/Slot'
+import SlotForm from '../components/SlotForm'
+
 import moment from 'moment'
+import { AuthContext } from '../context/Auth'
+
 
 
 function Home() {
+    const { user } = useContext(AuthContext)
 
     const { loading, data } = useQuery(FETCH_SLOTS_QUERY);
     const today = moment().format('dddd, MMMM Do')
     const year = moment().format('YYYY')
-    return (
+
+    const home = user ? (
         <Segment raised color="black">
 
             <Segment textAlign='right' raised color="orange">
@@ -30,7 +36,13 @@ function Home() {
                     </Grid.Column>
                     <GridColumn textAlign="right">
                         <Grid.Row >
-                            <Button color='black' icon='add' content='add slot' />
+
+                            <Modal closeIcon size="tiny" trigger={<Button color='black' icon='add' content='add slot' />}>
+                                <Modal.Header>Add new slot</Modal.Header>
+                                <Modal.Content >
+                                        <SlotForm />
+                                </Modal.Content>
+                            </Modal>
 
                         </Grid.Row>
                     </GridColumn>
@@ -54,16 +66,32 @@ function Home() {
             </Grid>
         </Segment>
 
-    )
+
+
+    ) : (
+            <Segment raised color="black">
+
+
+                <Message negative size="big">
+                    <Message.Header> You are not logged in.</Message.Header>
+                </Message>
+
+            </Segment>
+
+        );
+    return home;
 
 }
+
+
+
 
 export default Home;
 
 
 const FETCH_SLOTS_QUERY = gql`
 query{
-    slots(orderBy: "start"){
+    slots(orderBy : "start"){
         edges{
             node{
                 id
@@ -78,3 +106,4 @@ query{
 }
 
 `;
+

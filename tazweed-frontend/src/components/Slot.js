@@ -9,6 +9,8 @@ function Slot(props) {
     const { date, start, end } = props.slot
     const slot_time = moment(start, 'HH:mm:ss').format("HH:mm") + ' - ' + moment(end, 'HH:mm:ss').format("HH:mm ");
 
+    
+
     return (
         <Card fluid style={{marginBottom : 30}}>
             <Card.Content>
@@ -23,7 +25,7 @@ function Slot(props) {
             </Card.Content>
             <Card.Content extra>
                 <div className='ui two buttons'>
-                    <Button negative>
+                    <Button type ="submit" negative>
                         Delete
                     </Button>
                 </div>
