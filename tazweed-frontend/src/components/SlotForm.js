@@ -11,8 +11,6 @@ import gql from 'graphql-tag'
 
 function SlotForm(props) {
     const context = useContext(AuthContext)
-    console.log(context.user)
-
     const [errors, setErrors] = useState();
 
     const [values, setValues] = useState({
@@ -42,7 +40,6 @@ function SlotForm(props) {
         createSlot()
 
     }
-
 
     return (
         <div className="form-container">

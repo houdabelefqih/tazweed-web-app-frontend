@@ -1,16 +1,19 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { AuthContext } from '../context/Auth'
+import moment from 'moment'
+import { withRouter } from 'react-router-dom';
+
+
 import { Grid, Icon, Header, Segment, Button, GridColumn, Message, Modal } from 'semantic-ui-react'
+
 import Slot from '../components/Slot'
 import SlotForm from '../components/SlotForm'
-
-import moment from 'moment'
-import { AuthContext } from '../context/Auth'
+import { FETCH_SLOTS_QUERY } from '../util/graphql'
 
 
 
-function Home() {
+function Home(props) {
     const { user } = useContext(AuthContext)
 
     const { loading, data } = useQuery(FETCH_SLOTS_QUERY);
@@ -40,7 +43,7 @@ function Home() {
                             <Modal closeIcon size="tiny" trigger={<Button color='black' icon='add' content='add slot' />}>
                                 <Modal.Header>Add new slot</Modal.Header>
                                 <Modal.Content >
-                                        <SlotForm />
+                                    <SlotForm />
                                 </Modal.Content>
                             </Modal>
 
@@ -52,22 +55,20 @@ function Home() {
 
             </Segment>
 
-            <Grid padded columns={3}>
+            {
+                loading ? (<h3> Loading slots... <Icon loading name='spinner' /> </h3>) :
 
-                <Grid.Row>
-                    {loading || !data ?
-                        (<h3> Loading slots... <Icon loading name='spinner' /> </h3>
-                        ) :
-                        (data.slots.edges && data.slots.edges.map(({ node }) =>
-                            <Grid.Column key={node.id}>
-                                <Slot slot={node} />
-                            </Grid.Column>))}
-                </Grid.Row>
-            </Grid>
+                    ((data.slots.edges.length === 0) ? (<Message color='orange'>No slots to display</Message>) : (
+                        <Grid padded columns={5}>
+                            <Grid.Row>
+                                {data.slots.edges && data.slots.edges.map(({ node }) =>
+                                    <Grid.Column key={node.id}>
+                                        <Slot slot={node} />
+                                    </Grid.Column>)}
+                            </Grid.Row>
+                        </Grid>))
+            }
         </Segment>
-
-
-
     ) : (
             <Segment raised color="black">
 
@@ -79,31 +80,13 @@ function Home() {
             </Segment>
 
         );
+
+
     return home;
 
 }
 
+export default withRouter(Home);
 
 
-
-export default Home;
-
-
-const FETCH_SLOTS_QUERY = gql`
-query{
-    slots(orderBy : "start"){
-        edges{
-            node{
-                id
-                date
-                start
-                end
-                available
-
-            }
-        }
-    }
-}
-
-`;
 
